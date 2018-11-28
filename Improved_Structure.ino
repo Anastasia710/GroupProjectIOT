@@ -1,3 +1,5 @@
+int buttonState[];  //make volatile int ?
+
 void setup()
 {
 Serial.begin(9600);
@@ -11,18 +13,14 @@ unsigned long currentTime;  //since last action
 int ledAmount = 4;
 int ledPinNum[ledAmount] = {10, 11, 12, 13};
 int buttonPinNum[ledAmount] = {2, 3, 4, 5};  
-volatile int buttonState[]; //match up with buttonPin inputs; put in different function?
  for (int i = 0; i < ledAmount; ++i)
   {
    pinMode(ledPinNum[i], OUTPUT);   //LED's are on pins 10, 11, 12, 13
    pinMode(buttonPinNum[i], INPUT); //Buttons are on pins 2, 3, 4, 5; 2 and 3 are external interrupt pins
   }
 
-//set up interrupts
- attachInterrupt(digitalPinToInterrupt(buttonPinNum[0]), firstLight, FALLNG);
- attachInterrupt(digitalPinToInterrupt(buttonPinNum[1]), secondLight, FALLING);
- //TODO interrupt on pin 4
- //TODO interrupt on pin 5
+//set up interrupt
+ attachInterrupt(digitalPinToInterrupt(buttonPinNum[0]), findButtonPin, Rising); //high
    //TODO create functions for each interrupt
 }
 
@@ -92,6 +90,15 @@ void GetInactionTime() // move below GetAnswers()
     isSequenceCorrect = false;
     gameMode = false;
   }
+}
+                 
+void getButtonPin()
+{
+  buttonState[0] = digitalRead(buttonPinNum[0]);
+  buttonState[1] = digitalRead(buttonPinNum[1]);
+  buttonState[2] = digitalRead(buttonPinNum[2]);
+  buttonState[3] = digitalRead(buttinPinNum[3]);
+ if (buttonState[0]==false && //other are true)
 }
 
 void PlayAgain()
