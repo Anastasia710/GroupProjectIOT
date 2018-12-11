@@ -6,12 +6,12 @@
   int* lightOrder = NULL;
   unsigned long totalTime;
   unsigned long currentTime;
-  unsigned long previousTime = 0;
+  unsigned long previousTime = 0; /// volitile?
   bool asked = true;
   bool gameMode = false;
   
 
-  //  score,lives, levels, stagecorrect, worldcorrect, lighttime
+  //  score,lives, levels, (stagecorrect volitile?), worldcorrect, lighttime
   
 void setup()
 {
@@ -23,14 +23,12 @@ void setup()
     pinMode(ledPinNum[i], OUTPUT);
   }
   pinMode(interruptPinNum, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(interruptPinNum), findButtonPin, CHANGE);
-
-  pinMode(ledPinNum[3], OUTPUT);
+  attachInterrupt(digitalPinToInterrupt(interruptPinNum), findButtonPin, FALLING);
 }
 
 void loop() 
 {
-      int testb2 = digitalRead(buttonPinNum[1]);
+    /*  int testb2 = digitalRead(buttonPinNum[1]);
     if (testb2 == HIGH)
     {
       digitalWrite(ledPinNum[1], HIGH);
@@ -49,7 +47,12 @@ void loop()
       digitalWrite(ledPinNum[0], LOW);
     }
     delay(1000);
-    digitalWrite(ledPinNum[3], LOW);
+    digitalWrite(ledPinNum[3], LOW);*/
+    if (asked == false && gameMode == false)
+    {
+      playAgain();
+      startupGame();
+    }
 }
 
 void findButtonPin()
@@ -62,22 +65,23 @@ void findButtonPin()
 
 void buttonOneTriggered()
 {
-  digitalWrite(ledPinNum[3], HIGH);
+  digitalWrite(ledPinNum[0], HIGH);
+  if (buttonPinNum[0] = buttonPinNum[lightOrder])
 }
 
 void buttonTwoTriggered()
 {
-  digitalWrite(ledPinNum[3], HIGH);
+  digitalWrite(ledPinNum[1], HIGH);
 }
 
 void buttonThreeTriggered()
 {
-  digitalWrite(13, HIGH);
+  digitalWrite(ledPinNum[2], HIGH);
 }
 
 void buttonFourTriggered()
 {
-  digitalWrite(13, HIGH);
+  digitalWrite(ledPinNum[3], HIGH);
 }
 
 void playAgain()
