@@ -96,7 +96,17 @@ void GetInactionTime() // move below GetAnswers()
 
 void PlayAgain()
 {
-  //check an input, if true then gameMode = true; else gameMode = false;
+  No Interupts();
+ if(asked == false)
+ {
+  serial.print("Press any button to play again")
+  asked = true;
+ }
+ if(digitalRead(anybutton == LOW))
+ {
+  gamemode = true;
+  asked = false;
+ }
 }
                  
 void firstLight() //interrupt 0 = pin 2 match up with led pin 10
