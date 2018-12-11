@@ -102,7 +102,7 @@ void PlayAgain()
   serial.print("Press any button to play again")
   asked = true;
  }
- if(digitalRead(anybutton == LOW))
+ if(digitalRead(buttonPinNum == LOW))
  {
   gamemode = true;
   asked = false;
