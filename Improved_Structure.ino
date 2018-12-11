@@ -96,7 +96,7 @@ void GetInactionTime() // move below GetAnswers()
 
 void PlayAgain()
 {
-  No Interupts();
+  noInterupts();
  if(asked == false)
  {
   serial.print("Press any button to play again")
